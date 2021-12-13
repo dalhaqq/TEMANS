@@ -1,4 +1,4 @@
-@extends(isset(Auth::user()->id) ? 'layouts.master' : 'layouts.base');
+@extends(isset(Auth::user()->id) ? 'layouts.master' : 'layouts.base')
 @section('title', 'Dashboard')
 @section('content')
 <div class="row">

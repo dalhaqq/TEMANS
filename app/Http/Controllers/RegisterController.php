@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -28,7 +30,17 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create($request->validated());
-
+        $user->assignRole(Role::where('name', 'tenant')->first());
+        Tenant::create([
+            'user_id' => $user->id,
+            'address' => null,
+            'city' => null,
+            'zip_code' => null,
+            'phone_number' => null,
+            'is_verified' => false,
+            'photo' => null,
+            'id_card' => null
+        ]);
         return redirect('login')->with('success', "Berhasil membuat akun.");
     }
 }

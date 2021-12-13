@@ -1,4 +1,4 @@
-@extends('layouts.master');
+@extends('layouts.master')
 @section('title', '403 Forbidden')
 @section('content')
 <div class="alert alert-warning" role="alert">
