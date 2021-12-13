@@ -1,5 +1,5 @@
 @extends(isset(Auth::user()->id) ? 'layouts.master' : 'layouts.base')
-@section('title', 'Dashboard')
+@section('title', 'HEY')
 @section('content')
 <div class="row">
     @role('owner')
