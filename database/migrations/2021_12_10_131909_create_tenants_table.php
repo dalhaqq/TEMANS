@@ -14,14 +14,15 @@ class CreateTenantsTable extends Migration
     public function up()
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->foreignId('user_id')->primary()->constrained('users')->onDelete('cascade');
-            $table->string('address');
-            $table->string('city');
-            $table->integer('zip_code');
-            $table->string('phone_number');
-            $table->boolean('is_verified');
-            $table->string('photo');
-            $table->string('id_card');
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('zip_code')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->boolean('is_verified')->nullable();
+            $table->string('photo')->nullable();
+            $table->string('id_card')->nullable();
             $table->timestamps();
         });
     }

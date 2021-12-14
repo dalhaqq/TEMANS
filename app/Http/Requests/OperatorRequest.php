@@ -34,4 +34,15 @@ class OperatorRequest extends BaseFormRequest
             'username' => 'required|unique:users,username,' . $operator
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'email' => 'Email',
+            'name' => 'Nama',
+            'username' => 'Username',
+            'password' => 'Password',
+            'password_confirmation' => 'Konfirmasi password'
+        ];
+    }
 }

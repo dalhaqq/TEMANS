@@ -32,18 +32,14 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function attributes()
     {
         return [
-            'email:required' => 'Email tidak boleh kosong',
-            'email:email' => 'Email tidak valid',
-            'email:unique' => 'Email sudah digunakan',
-            'name:required' => 'Nama tidak boleh kosong',
-            'username:required' => 'Username tidak boleh kosong',
-            'username:unique' => 'Username sudah digunakan',
-            'password:required' => 'Password tidak boleh kosong',
-            'password:min' => 'Password minimal :min karakter',
-            'password_confirmation:same' => 'Password tidak sama'
+            'email' => 'Email',
+            'name' => 'Nama',
+            'username' => 'Username',
+            'password' => 'Password',
+            'password_confirmation' => 'Konfirmasi password'
         ];
     }
 }

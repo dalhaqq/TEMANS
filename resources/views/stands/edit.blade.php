@@ -98,6 +98,13 @@
             </div>
         </div>
 
+        <div class="form-group row mb-4">
+            <div class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></div>
+            <div class="col-sm-12 col-md-7">
+            <button class="btn btn-primary" type="submit">Simpan</button>
+            </div>
+        </div>
+        </form>
         <style>
             input[type=file]{
                 width: 90px;
@@ -118,13 +125,6 @@
             }
         };
         </script>
-        <div class="form-group row mb-4">
-            <div class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></div>
-            <div class="col-sm-12 col-md-7">
-            <button class="btn btn-primary" type="submit">Simpan</button>
-            </div>
-        </div>
-        </form>
     </div>
 </div>
 @endsection

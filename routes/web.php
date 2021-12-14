@@ -69,7 +69,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         Route::group(['prefix' => 'profile'], function() {
             Route::get('/settings', 'UserController@edit')->name('profile.edit');
-            Route::get('/settings/update', 'UserController@update')->name('profile.update');
+            Route::patch('/settings/update', 'UserController@update')->name('profile.update');
         });
     });
 });

@@ -42,4 +42,18 @@ class StandRequest extends BaseFormRequest
             'image' => 'nullable|image'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'no' => 'No',
+            'location' => 'Lokasi',
+            'price' => 'Harga',
+            'area' => 'Luas',
+            'type' => 'Tipe',
+            'description' => 'Deskripsi',
+            'facilities' => 'Fasilitas',
+            'image' => 'Gambar'
+        ];
+    }
 }
