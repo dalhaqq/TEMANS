@@ -38,5 +38,25 @@
         </a>
     </div>
     @endrole
+    @role('operator')
+    <div class="col-12 mb-4">
+    <div class="hero bg-primary text-white">
+        <div class="hero-inner">
+        <h2>Halo, {{auth()->user()->name}}!</h2>
+        <p class="lead">Selamat Datang di Tenant Management System.</p>
+        </div>
+    </div>
+    </div>
+    @endrole
+    @role('tenant')
+    <div class="col-12 mb-4">
+    <div class="hero bg-primary text-white">
+        <div class="hero-inner">
+        <h2>Halo, {{auth()->user()->name}}!</h2>
+        <p class="lead">Selamat Datang di Tenant Management System.</p>
+        </div>
+    </div>
+    </div>
+    @endrole
 </div>
 @endsection

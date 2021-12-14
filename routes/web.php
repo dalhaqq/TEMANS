@@ -58,13 +58,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::group(['prefix' => 'stands'], function() {
             Route::get('/', 'StandController@index')->name('stands.index');
-            Route::get('/list', 'StandController@index')->name('stands.list');
+            Route::get('/list', 'StandController@list')->name('stands.list');
             Route::get('/create', 'StandController@create')->name('stands.create');
             Route::post('/create', 'StandController@store')->name('stands.store');
             Route::get('/{stand}/show', 'StandController@show')->name('stands.show');
             Route::get('/{stand}/edit', 'StandController@edit')->name('stands.edit');
             Route::patch('/{stand}/update', 'StandController@update')->name('stands.update');
             Route::delete('/{stand}/delete', 'StandController@destroy')->name('stands.destroy');
+        });
+
+        Route::group(['prefix' => 'profile'], function() {
+            Route::get('/settings', 'UserController@edit')->name('profile.edit');
+            Route::get('/settings/update', 'UserController@update')->name('profile.update');
         });
     });
 });

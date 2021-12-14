@@ -29,7 +29,9 @@ class RolePermissionSeeder extends Seeder
             'stands.store',
             'stands.edit',
             'stands.update',
-            'stands.destroy'
+            'stands.destroy',
+            'profile.edit',
+            'profile.update'
         ];
         $operators = [
             'logout.perform',
@@ -38,12 +40,16 @@ class RolePermissionSeeder extends Seeder
             'stands.store',
             'stands.edit',
             'stands.update',
-            'stands.destroy'
+            'stands.destroy',
+            'profile.edit',
+            'profile.update'
         ];
         $tenants = [
             'logout.perform',
             'stands.list',
             'stands.show',
+            'profile.edit',
+            'profile.update'
         ];
         $owner = Role::where('name', 'owner')->first();
         foreach ($owners as $permission) {

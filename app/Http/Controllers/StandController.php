@@ -20,6 +20,12 @@ class StandController extends Controller
         return view('stands.index')->with(compact('stands'));
     }
 
+    public function list()
+    {
+        $stands = Stand::all();
+        return view('stands.list')->with(compact('stands'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +63,7 @@ class StandController extends Controller
      */
     public function show(Stand $stand)
     {
-        //
+        return view('stands.show')->with(compact('stand'));
     }
 
     /**
