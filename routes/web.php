@@ -53,6 +53,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::delete('/{operator}/delete', 'OperatorController@destroy')->name('operators.destroy');
         });
 
+        Route::group(['prefix' => 'business'], function() {
+            Route::get('/', 'BusinessController@index')->name('business.index');
+            Route::get('/create', 'BusinessController@create')->name('business.create');
+            Route::post('/create', 'BusinessController@store')->name('business.store');
+            Route::get('/{business}/edit', 'BusinessController@edit')->name('business.edit');
+            Route::patch('/{business}/update', 'BusinessController@update')->name('business.update');
+            Route::delete('/{business}/delete', 'BusinessController@destroy')->name('business.destroy');
+        });
+
         Route::group(['prefix' => 'tenants'], function() {
             Route::get('/', 'TenantController@index')->name('tenants.index');
             Route::get('/{tenant}/show', 'TenantController@show')->name('tenants.show');

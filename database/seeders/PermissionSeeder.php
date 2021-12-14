@@ -35,7 +35,13 @@ class PermissionSeeder extends Seeder
             'tenants.index',
             'tenants.show',
             'tenants.verify',
-            'tenants.unverify'
+            'tenants.unverify',
+            'business.index',
+            'business.create',
+            'business.store',
+            'business.edit',
+            'business.update',
+            'business.destroy'
         ];
         foreach ($permissions as $permission) {
             Permission::create([

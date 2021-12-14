@@ -53,7 +53,13 @@ class RolePermissionSeeder extends Seeder
             'stands.list',
             'stands.show',
             'profile.edit',
-            'profile.update'
+            'profile.update',
+            'business.index',
+            'business.create',
+            'business.store',
+            'business.edit',
+            'business.update',
+            'business.destroy'
         ];
         $owner = Role::where('name', 'owner')->first();
         foreach ($owners as $permission) {

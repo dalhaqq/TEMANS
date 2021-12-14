@@ -18,6 +18,7 @@
             @endrole
             @role('tenant')
             <li {{ Route::currentRouteName() == 'stands.list' ? 'class=active' : ''}}><a class="nav-link" href="{{ route('stands.list') }}"><i class="far fa-square"></i> <span>Lihat Stand</span></a></li>
+            <li {{ Route::currentRouteName() == 'business.index' ? 'class=active' : ''}}><a class="nav-link" href="{{ route('business.index') }}"><i class="fas fa-chart-line"></i> <span>Kelola Bisnis</span></a></li>
             @endrole
           </ul>
         </aside>
