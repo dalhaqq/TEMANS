@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StandRequest;
 use App\Models\Stand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class StandController extends Controller
 {
@@ -25,7 +27,7 @@ class StandController extends Controller
      */
     public function create()
     {
-        //
+        return view('stands.create');
     }
 
     /**
@@ -34,9 +36,17 @@ class StandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StandRequest $request)
     {
-        //
+        $data = $request->validated();
+        $image = $request->file('image');
+        $image_name = time()."_".$image->getClientOriginalName();
+        $path = 'uploads/stands';
+        $image->move($path, $image_name);
+        $data['image'] = $path . '/' . $image_name;
+        Stand::create($data);
+        return redirect()->route('stands.index')
+            ->withSuccess(__('Berhasil menambah stand.'));
     }
 
     /**
@@ -58,7 +68,7 @@ class StandController extends Controller
      */
     public function edit(Stand $stand)
     {
-        //
+        return view('stands.edit')->with(compact('stand'));
     }
 
     /**
@@ -68,9 +78,24 @@ class StandController extends Controller
      * @param  \App\Models\Stand  $stand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stand $stand)
+    public function update(StandRequest $request, Stand $stand)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            $image_name = time()."_".$image->getClientOriginalName();
+            $path = 'uploads/stands';
+            $image->move($path, $image_name);
+            $data['image'] = $path . '/' . $image_name;
+            if (File::exists($stand->image)) {
+                File::delete($stand->image);
+            }
+        } else {
+            $data['image'] = $stand->image;
+        }
+        $stand->update($data);
+        return redirect()->route('stands.index')
+            ->withSuccess(__('Berhasil mengubah stand.'));
     }
 
     /**
@@ -81,6 +106,12 @@ class StandController extends Controller
      */
     public function destroy(Stand $stand)
     {
-        //
+        $filename = $stand->image;
+        if(File::exists($filename)) {
+            File::delete($filename);
+        }
+        $stand->delete();
+        return redirect()->route('stands.index')
+            ->withSuccess(__('Berhasil menghapus stand.'));
     }
 }

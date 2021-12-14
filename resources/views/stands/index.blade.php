@@ -3,7 +3,9 @@
 @section('content')
 <div class="card">
     <div class="card-body">
+        @include('layouts.partials.messages')
     <div class="table-responsive">
+        <a href="{{ route('stands.create') }}" class="btn btn-primary mt-2 mb-3">Tambah Baru</a>
         <table class="table table-bordered table-md">
         <tbody><tr>
             <th>#</th>
