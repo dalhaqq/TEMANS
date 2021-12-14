@@ -6,6 +6,7 @@ use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class BusinessController extends Controller
 {
@@ -42,23 +43,12 @@ class BusinessController extends Controller
         $data['tenant_id'] = Auth::user()->profile->id;
         $proposal = $request->file('proposal');
         $filename = time()."_".$proposal->getClientOriginalName();
-        $path = 'uploads/stands';
+        $path = 'uploads/business';
         $proposal->move($path, $filename);
-        $data['image'] = $path . '/' . $filename;
+        $data['proposal'] = $path . '/' . $filename;
         Business::create($data);
         return redirect()->route('business.index')
             ->withSuccess(__('Berhasil menambah bisnis.'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Business  $business
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Business $business)
-    {
-        //
     }
 
     /**
@@ -69,7 +59,7 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        //
+        return view('business.edit')->with(compact('business'));
     }
 
     /**
@@ -79,9 +69,24 @@ class BusinessController extends Controller
      * @param  \App\Models\Business  $business
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Business $business)
+    public function update(BusinessRequest $request, Business $business)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('proposal')){
+            $proposal = $request->file('proposal');
+            $proposal_name = time()."_".$proposal->getClientOriginalName();
+            $path = 'uploads/business';
+            $proposal->move($path, $proposal_name);
+            $data['proposal'] = $path . '/' . $proposal_name;
+            if (File::exists($business->proposal)) {
+                File::delete($business->proposal);
+            }
+        } else {
+            $data['proposal'] = $business->proposal;
+        }
+        $business->update($data);
+        return redirect()->route('business.index')
+            ->withSuccess(__('Berhasil mengubah data bisnis.'));
     }
 
     /**
@@ -92,6 +97,12 @@ class BusinessController extends Controller
      */
     public function destroy(Business $business)
     {
-        //
+        $filename = $business->proposal;
+        if(File::exists($filename)) {
+            File::delete($filename);
+        }
+        $business->delete();
+        return redirect()->route('business.index')
+            ->withSuccess(__('Berhasil menghapus bisnis.'));
     }
 }

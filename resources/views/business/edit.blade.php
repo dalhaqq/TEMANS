@@ -1,98 +1,54 @@
 @extends('layouts.master')
-@section('title', 'Edit Stand')
+@section('title', 'Edit Bisnis')
 @section('content')
 <div class="card">
     <div class="card-header">
-    <h4>Ubah Data Stand</h4>
+    <h4>Ubah Data Bisnis</h4>
     </div>
     <div class="card-body">
-        <form action="{{ route('stands.update', ['stand' => $stand]) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('business.update', ['business' => $business]) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama</label>
             <div class="col-sm-12 col-md-7">
-            <input type="number" class="form-control" name="no" value="{{ $stand->no }}">
-            @if($errors->has('no'))
+            <input type="text" class="form-control" name="name" value="{{ $business->name }}">
+            @if($errors->has('name'))
             <div class="invalid-feedback">
-                {{ $errors->first('no') }}
+                {{ $errors->first('name') }}
             </div>
             @endif
             </div>
         </div>
         <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Lokasi</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Produk</label>
             <div class="col-sm-12 col-md-7">
-            <input type="text" class="form-control" name="location" value="{{ $stand->location }}">
-            @if($errors->has('location'))
+            <input type="text" class="form-control" name="product_type" value="{{ $business->product_type }}">
+            @if($errors->has('product_type'))
             <div class="invalid-feedback">
-                {{ $errors->first('location') }}
+                {{ $errors->first('product_type') }}
             </div>
             @endif
             </div>
         </div>
         <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Harga</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Omzet</label>
             <div class="col-sm-12 col-md-7">
-            <input type="number" class="form-control" name="price" value="{{ $stand->price }}">
-            @if($errors->has('price'))
+            <input type="number" class="form-control" name="revenue" value="{{ $business->revenue }}">
+            @if($errors->has('revenue'))
             <div class="invalid-feedback">
-                {{$errors->first('price')}}
+                {{$errors->first('revenue')}}
             </div>
             @endif
             </div>
         </div>
         <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Luas (m<sup>2</sup>)</label>
+            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Proposal</label>
             <div class="col-sm-12 col-md-7">
-            <input type="number" class="form-control" name="area" value="{{ $stand->area }}">
-            @if($errors->has('area'))
+            <div class="form-control"><input type="file" id="proposal" name="proposal" onchange="pressed()"><label id="fileLabel"><a href="{{asset($business->proposal)}}">{{ $business->proposal }}</a></label></div>
+            @if($errors->has('proposal'))
             <div class="invalid-feedback">
-                {{$errors->first('area')}}
-            </div>
-            @endif
-            </div>
-        </div>
-        <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tipe</label>
-            <div class="col-sm-12 col-md-7">
-            <input type="text" class="form-control" name="type" value="{{ $stand->type }}">
-            @if($errors->has('type'))
-            <div class="invalid-feedback">
-                {{ $errors->first('type') }}
-            </div>
-            @endif
-            </div>
-        </div>
-        <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Deskripsi</label>
-            <div class="col-sm-12 col-md-7">
-            <textarea name="description" class="form-control">{{ $stand->description }}</textarea>
-            @if($errors->has('description'))
-            <div class="invalid-feedback">
-                {{ $errors->first('description') }}
-            </div>
-            @endif
-            </div>
-        </div>
-        <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Fasilitas</label>
-            <div class="col-sm-12 col-md-7">
-            <textarea name="facilities" class="form-control">{{ $stand->facilities }}</textarea>
-            @if($errors->has('facilities'))
-            <div class="invalid-feedback">
-                {{ $errors->first('facilities') }}
-            </div>
-            @endif
-            </div>
-        </div>
-        <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Gambar</label>
-            <div class="col-sm-12 col-md-7">
-            <div class="form-control"><input type="file" id="image" name="image" onchange="pressed()"><label id="fileLabel"><a href="{{asset($stand->image)}}">{{ $stand->image }}</a></label></div>
-            @if($errors->has('image'))
-            <div class="invalid-feedback">
-                {{ $errors->first('image') }}
+                {{ $errors->first('proposal') }}
             </div>
             @endif
             </div>
@@ -105,18 +61,21 @@
             </div>
         </div>
         </form>
-        <style>
+                <style>
             input[type=file]{
                 width: 90px;
                 color:transparent;
             }
+            #fileLabel{
+                word-wrap: break-word;
+            }
         </style>
         <script>
         window.pressed = function(){
-            var input = document.getElementById('image');
+            var input = document.getElementById('proposal');
             if(input.value == "")
             {
-                fileLabel.innerHTML = "{{ $stand->image }}";
+                fileLabel.innerHTML = "{{ $business->proposal }}";
             }
             else
             {

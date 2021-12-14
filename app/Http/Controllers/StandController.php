@@ -101,7 +101,7 @@ class StandController extends Controller
         }
         $stand->update($data);
         return redirect()->route('stands.index')
-            ->withSuccess(__('Berhasil mengubah stand.'));
+            ->withSuccess(__('Berhasil mengubah data stand.'));
     }
 
     /**
