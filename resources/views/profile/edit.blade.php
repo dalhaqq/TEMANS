@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         @include('layouts.partials.messages')
-        <form action="{{ route('profile.update') }}" method="post">
+        <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <div class="form-group row mb-4">
@@ -69,7 +69,7 @@
         <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Foto Diri</label>
             <div class="col-sm-12 col-md-7">
-            <div class="form-control"><input type="file" id="photo" name="photo" onchange="pressed()"><label id="photoFileLabel"><a href="{{asset($user->profile->photo)}}">{{ $user->profile->photo }}</a></label></div>
+            <div class="form-control"><input type="file" id="photo" name="photo" onchange="pressed(event)"><label id="photoFileLabel"><a href="{{asset($user->profile->photo)}}">{{ $user->profile->photo }}</a></label></div>
             @if($errors->has('photo'))
             <div class="invalid-feedback">
                 {{ $errors->first('photo') }}
@@ -100,7 +100,7 @@
             var label = document.getElementById(input.id + "FileLabel");
             if(input.value == "")
             {
-                label.innerHTML = input.id == "photo" ? "{{ $user->profile->photo }}" : "{{ $user->profile->id_card }}";
+                label.innerHTML = (input.id == "photo" ? "{{ $user->profile->photo }}" : "{{ $user->profile->id_card }}");
             }
             else
             {
