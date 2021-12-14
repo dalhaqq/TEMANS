@@ -42,7 +42,11 @@ class RolePermissionSeeder extends Seeder
             'stands.update',
             'stands.destroy',
             'profile.edit',
-            'profile.update'
+            'profile.update',
+            'tenants.index',
+            'tenants.show',
+            'tenants.verify',
+            'tenants.unverify'
         ];
         $tenants = [
             'logout.perform',

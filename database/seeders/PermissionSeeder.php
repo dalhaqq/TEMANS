@@ -32,6 +32,10 @@ class PermissionSeeder extends Seeder
             'stands.destroy',
             'profile.edit',
             'profile.update',
+            'tenants.index',
+            'tenants.show',
+            'tenants.verify',
+            'tenants.unverify'
         ];
         foreach ($permissions as $permission) {
             Permission::create([

@@ -53,6 +53,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::delete('/{operator}/delete', 'OperatorController@destroy')->name('operators.destroy');
         });
 
+        Route::group(['prefix' => 'tenants'], function() {
+            Route::get('/', 'TenantController@index')->name('tenants.index');
+            Route::get('/{tenant}/show', 'TenantController@show')->name('tenants.show');
+            Route::post('/{tenant}/verify', 'TenantController@verify')->name('tenants.verify');
+            Route::post('/{tenant}/unverify', 'TenantController@unverify')->name('tenants.unverify');
+        });
+
         /**
          * User Routes
          */
